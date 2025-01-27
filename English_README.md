@@ -1,52 +1,60 @@
-# 無暇的程式碼 Typescript [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Clean%20Code%20Typescript&url=https://github.com/labs42io/clean-code-typescript)
+# clean-code-typescript [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Clean%20Code%20Typescript&url=https://github.com/labs42io/clean-code-typescript)
 
-將程式碼整潔的概念適用至 TypeScript
-靈感來自於[clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
+Clean Code concepts adapted for TypeScript.  
+Inspired from [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
 
-## 目錄
+## Table of Contents
 
-  1. [簡介](#簡介)
-  2. [變數](#變數)
-  3. [函式](#函式)
-  4. [物件和資料結構](#物件和資料結構)
-  5. [類別](#類別)
+  1. [Introduction](#introduction)
+  2. [Variables](#variables)
+  3. [Functions](#functions)
+  4. [Objects and Data Structures](#objects-and-data-structures)
+  5. [Classes](#classes)
   6. [SOLID](#solid)
-  7. [測試](#測試)
-  8. [併發](#併發)
-  9. [錯誤處理](#錯誤處理)
-  10. [格式化](#格式化)
-  11. [註解](#註解)
-  12. [翻譯](#翻譯)
+  7. [Testing](#testing)
+  8. [Concurrency](#concurrency)
+  9. [Error Handling](#error-handling)
+  10. [Formatting](#formatting)
+  11. [Comments](#comments)
+  12. [Translations](#translations)
 
 ## Introduction
 
-![當你閱讀程式碼時，咒罵次數來衡量軟體品質的幽默圖片](https://www.osnews.com/images/comics/wtfm.jpg)
+![Humorous image of software quality estimation as a count of how many expletives
+you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-這些軟體工程原則來自於 Robert C. Martin 的著作
-[*無暇的程式碼*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)，
-並且改編為 TypeScript 版本。這不是程式碼風格指南，而是一份指導方針，用來產出
-[可讀性高、可重複使用、可重構](https://github.com/ryanmcdermott/3rs-of-software-architecture) 的 TypeScript 程式碼。
+Software engineering principles, from Robert C. Martin's book
+[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
+adapted for TypeScript. This is not a style guide. It's a guide to producing
+[readable, reusable, and refactorable](https://github.com/ryanmcdermott/3rs-of-software-architecture) software in TypeScript.
 
-這裡的每一項原則都不需要嚴格遵守，更不用說要取得普遍的共識。這些只是指導方針，沒有其他的意義，但它們都是
-《無暇的程式碼》作者們多年累積的集體經驗所制定的。
+Not every principle herein has to be strictly followed, and even fewer will be
+universally agreed upon. These are guidelines and nothing more, but they are
+ones codified over many years of collective experience by the authors of
+*Clean Code*.
 
-我們的軟體工程工藝才剛超過 50 年的歷史，還有很多需要學習的地方。當軟體架構像建築一樣歷史悠久時，
-也許我們就會有更嚴格的規則可以遵循。現在，就讓這些指導方針作為評估你和你的團隊所產出的 TypeScript 
-程式碼品質的基準。
+Our craft of software engineering is just a bit over 50 years old, and we are
+still learning a lot. When software architecture is as old as architecture
+itself, maybe then we will have harder rules to follow. For now, let these
+guidelines serve as a touchstone by which to assess the quality of the
+TypeScript code that you and your team produce.
 
-還有一件事：了解這些原則並不會立即讓你成為更好的軟體開發人員，即使遵循多年也不代表你不會犯錯。
-每段程式碼一開始都像初稿，就像濕黏土一樣逐漸塑造成最終的形狀。最後，當我們與同儕一起審查時，
-我們會把不完美的地方雕琢掉。不要因為需要改進的初稿而自責，應該責備的是程式碼！
+One more thing: knowing these won't immediately make you a better software
+developer, and working with them for many years doesn't mean you won't make
+mistakes. Every piece of code starts as a first draft, like wet clay getting
+shaped into its final form. Finally, we chisel away the imperfections when
+we review it with our peers. Don't beat yourself up for first drafts that need
+improvement. Beat up the code instead!
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-## 變數
+## Variables
 
-### 使用有意義的變數名稱
+### Use meaningful variable names
 
-以讀者能夠理解差異的方式來區分名稱。
+Distinguish names in such a way that the reader knows what the differences offer.
 
-**不好:**
+**Bad:**
 
 ```ts
 function between<T>(a1: T, a2: T, a3: T): boolean {
@@ -55,7 +63,7 @@ function between<T>(a1: T, a2: T, a3: T): boolean {
 
 ```
 
-**好：**
+**Good:**
 
 ```ts
 function between<T>(value: T, left: T, right: T): boolean {
@@ -63,13 +71,13 @@ function between<T>(value: T, left: T, right: T): boolean {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用可發音的變數名稱
+### Use pronounceable variable names
 
-如果你無法發音，就無法在討論時不顯得很蠢。
+If you can’t pronounce it, you can’t discuss it without sounding like an idiot.
 
-**不好:**
+**Bad:**
 
 ```ts
 type DtaRcrd102 = {
@@ -89,11 +97,11 @@ type Customer = {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用相同的詞彙來表示相同類型的變數
+### Use the same vocabulary for the same type of variable
 
-**不好:**
+**Bad:**
 
 ```ts
 function getUserInfo(): User;
@@ -101,66 +109,66 @@ function getUserDetails(): User;
 function getUserData(): User;
 ```
 
-**好：**
+**Good:**
 
 ```ts
 function getUser(): User;
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用可搜尋的命名
+### Use searchable names
 
-我們讀程式的時間會比寫程式的時間還要多。因此我們寫出的程式碼必須要容易閱讀和搜尋。如果我們沒有為理解程式很重要的變數取有意義的名稱，就會傷害到閱讀程式的人。請讓你的命名容易搜尋。像是 [ESLint](https://typescript-eslint.io/) 這類工具可以幫助找出未命名的常數 (也就是所謂的魔術字串和魔術數字)。
+We will read more code than we will ever write. It's important that the code we do write must be readable and searchable. By *not* naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [ESLint](https://typescript-eslint.io/) can help identify unnamed constants (also known as magic strings and magic numbers).
 
-**不好：**
+**Bad:**
 
 ```ts
-// 86400000 是什麼鬼東西？
+// What the heck is 86400000 for?
 setTimeout(restart, 86400000);
 ```
 
-**好：**
+**Good:**
 
 ```ts
-// 將它們宣告為大寫的具名常數
+// Declare them as capitalized named constants.
 const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000; // 86400000
 
 setTimeout(restart, MILLISECONDS_PER_DAY);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用解釋性的變數
+### Use explanatory variables
 
-**不好:**
+**Bad:**
 
 ```ts
 declare const users: Map<string, User>;
 
 for (const keyValue of users) {
-  // 遍歷使用者的 map
+  // iterate through users map
 }
 ```
 
-**好：**
+**Good:**
 
 ```ts
 declare const users: Map<string, User>;
 
 for (const [id, user] of users) {
-  // 遍歷使用者的 map
+  // iterate through users map
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 避免需要腦中映射的命名
+### Avoid Mental Mapping
 
-明確比隱含好。
-*清晰是王道。*
+Explicit is better than implicit.  
+*Clarity is king.*
 
-**不好：**
+**Bad:**
 
 ```ts
 const u = getUser();
@@ -168,7 +176,7 @@ const s = getSubscription();
 const t = charge(u, s);
 ```
 
-**好：**
+**Good:**
 
 ```ts
 const user = getUser();
@@ -176,13 +184,13 @@ const subscription = getSubscription();
 const transaction = charge(user, subscription);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 不要加入不必要的上下文
+### Don't add unneeded context
 
-如果你的類別/型別/物件名稱已經告訴你某些資訊，就不要在變數名稱中重複。
+If your class/type/object name tells you something, don't repeat that in your variable name.
 
-**不好:**
+**Bad:**
 
 ```ts
 type Car = {
@@ -196,7 +204,7 @@ function print(car: Car): void {
 }
 ```
 
-**好：**
+**Good:**
 
 ```ts
 type Car = {
@@ -210,13 +218,13 @@ function print(car: Car): void {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用預設參數而不是短路運算或條件式
+### Use default arguments instead of short circuiting or conditionals
 
-預設參數通常比短路運算更簡潔。
+Default arguments are often cleaner than short circuiting.
 
-**不好:**
+**Bad:**
 
 ```ts
 function loadPages(count?: number) {
@@ -225,7 +233,7 @@ function loadPages(count?: number) {
 }
 ```
 
-**好：**
+**Good:**
 
 ```ts
 function loadPages(count: number = 10) {
@@ -233,13 +241,14 @@ function loadPages(count: number = 10) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
-### 使用列舉來表達意圖
+### Use enum to document the intent
 
-列舉可以幫助你表達程式的意圖。例如當我們關注的是值的差異性而不是實際的值時。
+Enums can help you document the intent of the code. For example when we are concerned about values being
+different rather than the exact value of those.
 
-**不好:**
+**Bad:**
 
 ```ts
 const GENRE = {
@@ -252,17 +261,17 @@ const GENRE = {
 projector.configureFilm(GENRE.COMEDY);
 
 class Projector {
-  // 投影機的宣告
+  // declaration of Projector
   configureFilm(genre) {
     switch (genre) {
       case GENRE.ROMANTIC:
-        // 要執行的邏輯
+        // some logic to be executed 
     }
   }
 }
 ```
 
-**好：**
+**Good:**
 
 ```ts
 enum GENRE {
@@ -275,17 +284,17 @@ enum GENRE {
 projector.configureFilm(GENRE.COMEDY);
 
 class Projector {
-  // 投影機的宣告
+  // declaration of Projector
   configureFilm(genre) {
     switch (genre) {
       case GENRE.ROMANTIC:
-        // 要執行的邏輯
+        // some logic to be executed 
     }
   }
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Functions
 
@@ -354,7 +363,7 @@ createMenu({
 });
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Functions should do one thing
 
@@ -386,7 +395,7 @@ function isActiveClient(client: Client) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Function names should say what they do
 
@@ -414,7 +423,7 @@ const date = new Date();
 addMonthToDate(date, 1);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Functions should only be one level of abstraction
 
@@ -482,7 +491,7 @@ function parse(tokens: Token[]): SyntaxTree {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Remove duplicate code
 
@@ -592,7 +601,7 @@ function showEmployeeList(employee: Employee[]) {
 
 You should be critical about code duplication. Sometimes there is a tradeoff between duplicated code and increased complexity by introducing unnecessary abstraction. When two implementations from two different modules look similar but live in different domains, duplication might be acceptable and preferred over extracting the common code. The extracted common code, in this case, introduces an indirect dependency between the two modules.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Set default objects with Object.assign or destructuring
 
@@ -665,7 +674,7 @@ createMenu({ body: 'Bar' });
 To avoid any side effects and unexpected behavior by passing in explicitly the `undefined` or `null` value, you can tell the TypeScript compiler to not allow it.
 See [`--strictNullChecks`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#--strictnullchecks) option in TypeScript.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't use flags as function parameters
 
@@ -696,7 +705,7 @@ function createFile(name: string) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid Side Effects (part 1)
 
@@ -738,7 +747,7 @@ const encodedName = toBase64(name);
 console.log(name);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid Side Effects (part 2)
 
@@ -772,7 +781,7 @@ function addItemToCart(cart: CartItem[], item: Item): CartItem[] {
 };
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't write to global functions
 
@@ -806,7 +815,7 @@ class MyArray<T> extends Array<T> {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Favor functional programming over imperative programming
 
@@ -861,7 +870,7 @@ const totalOutput = contributions
   .reduce((totalLines, output) => totalLines + output.linesOfCode, 0);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Encapsulate conditionals
 
@@ -885,7 +894,7 @@ if (canActivateService(subscription, account)) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid negative conditionals
 
@@ -913,7 +922,7 @@ if (!isEmailUsed(email)) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid conditionals
 
@@ -978,7 +987,7 @@ class Cessna extends Airplane {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid type checking
 
@@ -1008,7 +1017,7 @@ function travelToTexas(vehicle: Vehicle) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't over-optimize
 
@@ -1032,7 +1041,7 @@ for (let i = 0; i < list.length; i++) {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Remove dead code
 
@@ -1065,7 +1074,7 @@ const req = requestModule;
 inventoryTracker('apples', req, 'www.inventory-awesome.io');
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Use iterators and generators
 
@@ -1148,7 +1157,7 @@ itiriri(fibonacci())
   .forEach(fib => console.log(fib));
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Objects and Data Structures
 
@@ -1214,7 +1223,7 @@ const account = new BankAccount();
 account.balance = 100;
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Make objects have private/protected members
 
@@ -1257,7 +1266,7 @@ class Circle {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Prefer immutability
 
@@ -1355,7 +1364,7 @@ const result = readonlyData(100);
 result.value = 200; // error
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### type vs. interface
 
@@ -1413,7 +1422,7 @@ class Square implements Shape {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Classes
 
@@ -1457,7 +1466,7 @@ class Dashboard {
 // ...
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### High cohesion and low coupling
 
@@ -1537,7 +1546,7 @@ class UserNotifier {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Prefer composition over inheritance
 
@@ -1606,7 +1615,7 @@ class EmployeeTaxData {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Use method chaining
 
@@ -1688,7 +1697,7 @@ const query = new QueryBuilder()
   .build();
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## SOLID
 
@@ -1743,7 +1752,7 @@ class UserSettings {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Open/Closed Principle (OCP)
 
@@ -1836,7 +1845,7 @@ class HttpRequester {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Liskov Substitution Principle (LSP)
 
@@ -1953,12 +1962,12 @@ const shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeShapes(shapes);
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Interface Segregation Principle (ISP)
 
 ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle.
-What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don't actually need.
+What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don’t actually need.
 
 **Bad:**
 
@@ -2034,7 +2043,7 @@ class EconomicPrinter implements Printer {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Dependency Inversion Principle (DIP)
 
@@ -2105,6 +2114,7 @@ class XmlFormatter implements Formatter {
   }
 }
 
+
 class JsonFormatter implements Formatter {
   parse<T>(content: string): T {
     // Converts a JSON string to an object T
@@ -2130,7 +2140,7 @@ const reader = new ReportReader(new JsonFormatter());
 const report = await reader.read('report.json');
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Testing
 
@@ -2148,7 +2158,7 @@ There's no excuse to not write tests. There are [plenty of good JS test framewor
 
 3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### F.I.R.S.T. rules
 
@@ -2164,7 +2174,7 @@ Clean tests should follow the rules:
 
 - **Timely** unit tests should be written before the production code. If you write tests after the production code, you might find writing tests too hard.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Single concept per test
 
@@ -2214,7 +2224,7 @@ describe('AwesomeDate', () => {
 });
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### The name of the test should reveal its intention
 
@@ -2248,7 +2258,7 @@ describe('Calendar', () => {
 });
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Concurrency
 
@@ -2319,7 +2329,7 @@ Promises supports a few helper methods that help make code more concise:
 
 `Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Async/Await are even cleaner than Promises
 
@@ -2367,7 +2377,7 @@ try {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Error Handling
 
@@ -2434,7 +2444,7 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't ignore caught errors
 
@@ -2470,7 +2480,7 @@ try {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't ignore rejected promises
 
@@ -2479,7 +2489,7 @@ For the same reason you shouldn't ignore caught errors from `try/catch`.
 **Bad:**
 
 ```ts
-function getUser()
+getUser()
   .then((user: User) => {
     return sendEmail(user.email, 'Welcome!');
   })
@@ -2511,7 +2521,7 @@ try {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Formatting
 
@@ -2574,7 +2584,7 @@ Prefer using `PascalCase` for class, interface, type and namespace names.
 Prefer using `camelCase` for variables, functions and class members.
 Prefer using capitalized `SNAKE_CASE` for constants.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Function callers and callees should be close
 
@@ -2663,7 +2673,7 @@ const review = new PerformanceReview(employee);
 review.review();
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Organize imports
 
@@ -2712,7 +2722,7 @@ import { ApiCredentials, Adapters } from './common/api/authorization';
 import { ConfigPlugin } from './plugins/config/configPlugin';
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Use typescript aliases
 
@@ -2746,13 +2756,13 @@ import { UserService } from '@services/UserService';
 ...
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Comments
 
 The use of a comments is an indication of failure to express without them. Code should be the only source of truth.
   
-> Don't comment bad code—rewrite it.  
+> Don’t comment bad code—rewrite it.  
 > — *Brian W. Kernighan and P. J. Plaugher*
 
 ### Prefer self explanatory code instead of comments
@@ -2773,7 +2783,7 @@ const isSubscriptionActive = subscription.endDate > Date.now;
 if (isSubscriptionActive) { /* ... */ }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't leave commented out code in your codebase
 
@@ -2799,7 +2809,7 @@ type User = {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Don't have journal comments
 
@@ -2827,7 +2837,7 @@ function combine(a: number, b: number): number {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid positional markers
 
@@ -2889,7 +2899,7 @@ class Client {
 };
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### TODO comments
 
@@ -2917,7 +2927,7 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 }
 ```
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ## Translations
 
@@ -2939,4 +2949,4 @@ References will be added once translations are completed.
 Check this [discussion](https://github.com/labs42io/clean-code-typescript/issues/15) for more details and progress.
 You can make an indispensable contribution to *Clean Code* community by translating this to your language.
 
-**[⬆ 回到頂端](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
